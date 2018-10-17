@@ -1,0 +1,126 @@
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      Genel
+    </ng-template>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div>
+            <h1>{{islemCaption}}</h1>
+            <form (submit)="editProduct()" #productForm="ngForm">
+              <div *ngIf="mode=='del'">
+                <div class="card" style="margin:10px 0">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <h2 class="pull-right">&nbsp;Kaydı Sil</h2>
+                      <label class="switch ">
+                        <input type="checkbox" class="danger" [(ngModel)]="silOnay" name="silOnay">
+                        <span class="slider"></span>
+                      </label>
+                    </li>
+                  </ul>
+                  <button type="submit" #btnSubmit [disabled]="silOnay!=true" name="btnSubmit" class="btn btn-danger btn-block">Sil</button>
+                </div>
+              </div>
+              <input type="hidden" name="company_id" [(ngModel)]="product_s.product.company_id">
+              <input type="hidden" name="id" [(ngModel)]="product_s.product.id">
+              <div class="form-group">
+                <label type="label" for="name">Ürün Adı</label>
+                <input autofocus type="text" class="form-control" id="name" name="name" required minlength="4" [(ngModel)]="product_s.product.name"
+                  #name="ngModel" placeholder="Ad">
+              </div>
+              <div class="form-group">
+                <label type="label" for="pname">Ürün Fiyatı</label>
+                <input type="text" class="form-control" name="pname" [(ngModel)]="product_s.product.price" placeholder="">
+              </div>
+              <div class="form-group">
+                <label type="label" for="selectedVat">Vergi</label>
+                <ng-multiselect-dropdown name="selectedVat" required [data]="vats" [(ngModel)]="selectedVat" [settings]="vatSettings" (onSelect)="onItemSelectVat($event)"
+                  (onSelectAll)="onSelectAll($event)">
+                </ng-multiselect-dropdown>
+              </div>
+              <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                <div *ngIf="name.errors.required">
+                  Ürün Adı Gerekli.
+                </div>
+                <div *ngIf="name.errors.minlength">
+                  Müşteri Adı en az 4 karekter olmalı.
+                </div>
+              </div>
+              <div *ngIf="selectedVat.length==0" class="alert alert-danger">
+                Vergi dilimi Gerekli.
+              </div>
+              <div class="form-group">
+                <label type="label" for="category">Kategoriler</label>
+                <ng-multiselect-dropdown name="categories" [data]="categories" [(ngModel)]="product_s.categories" [settings]="dropdownSettings"
+                  (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                </ng-multiselect-dropdown>
+              </div>
+              <div class="from-group text-right">
+                <button *ngIf="mode=='add'||mode=='edit'" [disabled]="productForm.invalid" type="submit" #btnSubmit name="btnSubmit" class="btn btn-primary btn-lg">Onayla</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab *ngIf="product_s.product.id>0">
+    <ng-template mat-tab-label>
+      Resimler
+    </ng-template>
+    <div class="container">
+      <div class="col-md-12">
+        <div class="form-group">
+            <table class="table table-lg table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col"></th>
+                    <th scope="col">Sıra</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngIf="product_s.pictures.length==0">
+                    <td colspan="5">Kayıt Yok</td>
+                  </tr>
+                  <tr *ngFor="let c of product_s.pictures; let i = index">
+                    <th scope="row">{{i+1}}</th>
+                    <td><img [src]="'data:image/png;base64,'+c.picture" height="40" width="50"></td>
+                    <td>{{c.order}}</td>
+                    <td>
+                      <button class="btn btn-danger" (click)="deletePicture(c.id)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+          
+
+
+<!-- 
+          <mat-list role="list">
+              <mat-list-item role="listitem" *ngFor="let p of product_s.pictures">
+                  <img [src]="'data:image/png;base64,'+p.picture" height="100"> <br/>
+
+                {{p.filepath}}
+              </mat-list-item>
+
+            </mat-list> -->
+        </div>
+
+        <div class="form-group">
+          <img [src]="uploadUrl" height="100"> <br/>
+          <input class="form-control" #fileInput type="file" (change)="onSelectFile($event)" />
+        </div>
+        <div class="from-group text-right">
+          <button class="btn btn-primary" (click)="uploadFile()">Yükle</button>
+        </div>
+      </div>
+    </div>
+
+  </mat-tab>
+</mat-tab-group>

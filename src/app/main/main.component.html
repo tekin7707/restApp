@@ -1,0 +1,134 @@
+<div class="container">
+    <div class="page" *ngIf="isLoggedIn">
+        <div>
+            <h2>Kişisel Hasap Sistemimize hoşgeldiniz !</h2>
+            <p class="lead">
+                Sizi son gelişmeler hakkında buradan bilgilendiriyor olacağız.
+            </p>
+            <dl>
+                <dt>Coffee</dt>
+                <dd>- black hot drink</dd>
+                <dt>Milk</dt>
+                <dd>- white cold drink</dd>
+            </dl>
+        </div>
+    </div>
+    <!-- Aşağısı no login-->
+    <div class="page" *ngIf="!isLoggedIn">
+
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <h2>Kişisel Hesap Defteriniz</h2>
+            <br>
+            <ul>
+                <li>Ofis dışından da işinize çevrimiçi olun</li>
+                <li>Mesainiz bittiğinde, herkes işini bırakmıyor.</li>
+                <li>Siz tatildeyken işinizle kim ilgileniyor?</li>
+                <li>Tüm hesabınıza telefonunuz kadar yakınsınız.</li>
+            </ul>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="card">
+                <h5 class="card-header">Hemen Giriş yapın</h5>
+                <div class="card-body">
+                    <form (submit)="login(loginForm)" #loginForm="ngForm">
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Email" ngModel
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Şifre" ngModel required>
+                        </div>
+                        <span class="psw">
+                            {{message}}
+                        </span>
+                        <button type="submit" class="btn btn-lg btn-primary pull-right">Giriş</button>
+                    </form>
+                </div>
+            </div>
+            <br> henüz kaydınız yoksa
+            <br>
+            <br>
+            <div class="card">
+                <h5 class="card-header">Kaydol</h5>
+                <div class="card-body">
+                    <form (submit)="register(newForm)" #newForm="ngForm">
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <label for="name">Ünvan</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" aria-describedby="validationTooltipUsernamePrepend" name="name" id="name" ngModel
+                                        required #name="ngModel">
+
+                                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                                        <div *ngIf="name.errors.required">
+                                            Müşteri Adı Gerekli.
+                                        </div>
+                                        <div *ngIf="name.errors.minlength">
+                                            Müşteri Adı en az 4 karekter olmalı.
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <label for="remail">Email</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="remail" id="remail" [pattern]="emailPattern" ngModel required #remail="ngModel">
+
+                                    <div *ngIf="remail.invalid && (remail.dirty || remail.touched)" class="alert alert-danger">
+                                        <div *ngIf="remail.errors.pattern || remail.errors.required">
+                                            Geçerli bir Email adresi
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="rpassword">Şifre</label>
+                                <input type="password" class="form-control" name="rpassword" id="rpassword" minlength="4" ngModel required #rpassword="ngModel">
+                                <div class="invalid-tooltip">
+                                    Şifre Giriniz
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="rpassword1">Şifre</label>
+                                <input type="password" class="form-control" name="rpassword1" id="rpassword1" minlength="4" ngModel required #rpassword1="ngModel">
+                                <div class="invalid-tooltip">
+                                    Tekrar Şifre Giriniz
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="(rpassword1.invalid || rpassword.invalid) && (rpassword.dirty || rpassword.touched ||rpassword1.dirty || rpassword1.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="rpassword.errors.required || rpassword1.errors.required ">
+                                Şifre Boş olamaz
+                            </div>
+                            <div *ngIf="!rpassword.errors.required && !rpassword1.errors.required && (rpassword.errors.minlength || rpassword1.errors.minlength)">
+                                Şifreler en az 4 karekter olmalı
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <label for="address">Adres</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="address" id="address" ngModel>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="message != ''" class="alert alert-danger">
+                            <div>
+                                {{message}}
+                            </div>
+                        </div>
+                        <br>
+                        <button [disabled]="!newForm.valid" class="btn btn-lg btn-primary pull-right" type="submit">Kaydol</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

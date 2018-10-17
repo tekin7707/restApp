@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div>
+        <h1>{{islemCaption}}</h1>
+        <form (submit)="editCustomer()" #customerForm="ngForm">
+          <div *ngIf="mode=='del'">
+            <div class="card" style="margin:10px 0">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <h2 class="pull-right">&nbsp;Kaydı Sil</h2>
+                  <label class="switch ">
+                    <input type="checkbox" class="danger" [(ngModel)]="silOnay" name="silOnay">
+                    <span class="slider"></span>
+                  </label>
+                </li>
+              </ul>
+              <button type="submit" #btnSubmit [disabled]="silOnay!=true" name="btnSubmit" class="btn btn-danger btn-block">Sil</button>
+            </div>
+          </div>
+          <input type="hidden" name="id" [(ngModel)]="customer.id">
+          <input type="hidden" name="company_id" [(ngModel)]="customer.company_id">
+          <div class="form-group">
+            <label type="label" for="name">Müşteri Adı</label>
+            <input autofocus type="text" class="form-control" id="name" name="name" required minlength="4" [(ngModel)]="customer.name"
+              #name="ngModel" placeholder="Ad">
+          </div>
+          <div class="form-group">
+            <label type="label" for="pname">Yetkili Ad</label>
+            <input type="text" class="form-control" name="pname" [(ngModel)]="customer.pname" placeholder="Adres">
+          </div>
+          <div class="form-group">
+            <label type="label" for="psurname">Yetkili Soyad</label>
+            <input type="text" class="form-control" name="psurname" [(ngModel)]="customer.psurname" placeholder="Adres">
+          </div>
+          <div class="form-group">
+            <label type="label" for="address">Adres</label>
+            <input type="text" class="form-control" name="address" [(ngModel)]="customer.address" placeholder="Adres">
+          </div>
+          <div class="form-group">
+            <label type="label" for="vd">Vergi Dairesi</label>
+            <input type="text" class="form-control" name="vd" [(ngModel)]="customer.vd" placeholder="Adres">
+          </div>
+          <div class="form-group">
+            <label type="label" for="vn">Vergi Numarası</label>
+            <input type="text" class="form-control" name="vn" [(ngModel)]="customer.vn" placeholder="Adres">
+          </div>
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+            <div *ngIf="name.errors.required">
+              Müşteri Adı Gerekli.
+            </div>
+            <div *ngIf="name.errors.minlength">
+              Müşteri Adı en az 4 karekter olmalı.
+            </div>
+          </div>
+
+          <div class="from-group text-right">
+            <button *ngIf="mode=='add'||mode=='edit'" [disabled]="customerForm.invalid" type="submit" #btnSubmit name="btnSubmit" class="btn btn-primary btn-lg">Onayla</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

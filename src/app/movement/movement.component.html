@@ -1,0 +1,36 @@
+<div text-center>
+    
+  <button class="btn btn-warning" routerLink="../movement-edit/add/0">
+      <span class="glyphicon glyphicon-add"></span>
+      Kayıt Ekle
+    </button>
+
+  <table id="myDataTable" class="table row-border hover">
+    <thead>
+      <tr>
+        <th>Tarih</th>
+        <th>Müşteri</th>
+        <th>Gelir/Gider</th>
+        <th>Toplam Tutar</th>
+        <th>Düzenle / Sil</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let l of movement_list">
+        <td>{{l.movement.date}}</td>
+        <td>{{l.customer_name}}</td>
+        <td>{{l.movement.totalprice}}</td>
+        <td>{{l.movement_type_plus}}</td>
+        <td class="text-right">
+          <button class="btn btn-warning" routerLink="../movement-edit/edit/{{l.movement.id}}">
+            <span class="glyphicon glyphicon-edit" alt="Düzenle"></span>
+          </button>
+          &nbsp;
+          <button class="btn btn-danger" routerLink="../movement-edit/del/{{l.movement.id}}">
+            <span class="glyphicon glyphicon-trash" alt="Sil"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

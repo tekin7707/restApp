@@ -1,0 +1,89 @@
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      Genel
+    </ng-template>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div>
+            <form (submit)="updateUser()" #userForm="ngForm" *ngIf="activeUser">
+            <h1>{{activeUser.name}}</h1>
+            <div class="form-group">
+                <label type="label" for="name">Ad</label>
+                <input type="text" class="form-control" name="name" 
+                required minlength="4" [(ngModel)]="activeUser.name" placeholder="Ad">
+              </div>
+              <div class="form-group">
+                <label type="label" for="surname">Soyad</label>
+                <input type="text" class="form-control" name="surname" [(ngModel)]="activeUser.surname" placeholder="">
+              </div>
+
+              <div class="form-group">
+                <label type="label" for="address">Adres</label>
+                <input type="text" class="form-control" name="address" [(ngModel)]="activeUser.address" placeholder="">
+              </div>
+              <div class="form-group">
+                <label type="label" for="email">Email</label>
+                <input type="text" class="form-control" name="email" [(ngModel)]="activeUser.email" placeholder="">
+              </div>
+              <div class="form-group">
+                <a routerLink="" class="nav-item" >Şifre Değiştir</a>
+              </div>
+
+              <div class="from-group text-right">
+                <button type="submit" #btnSubmit name="btnSubmit" class="btn btn-primary btn-lg">Onayla</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      Detaylar
+    </ng-template>
+    <div class="container">
+      <div class="col-md-12">
+        <div class="form-group">
+          <table class="table table-lg table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col"></th>
+                <th scope="col">Sıra</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="!picture">
+                <td colspan="5">Kayıt Yok</td>
+              </tr>
+              <tr *ngIf="picture">
+                <td>
+                  <img [src]="'data:image/png;base64,'+picture.picture" height="40" width="50">
+                </td>
+                <td>
+                  <button class="btn btn-danger" (click)="deletePicture(picture.id)">
+                    <span class="glyphicon glyphicon-trash"></span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="form-group">
+          <img [src]="uploadUrl" height="100">
+          <br/>
+          <input class="form-control" #fileInput type="file" (change)="onSelectFile($event)" />
+        </div>
+        <div class="from-group text-right">
+          <button class="btn btn-primary" (click)="uploadFile()">Yükle</button>
+        </div>
+      </div>
+    </div>
+
+  </mat-tab>
+</mat-tab-group>

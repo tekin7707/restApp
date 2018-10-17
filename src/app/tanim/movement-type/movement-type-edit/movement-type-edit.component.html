@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div>
+        <form (submit)="editMovementType()" #userForm="ngForm" *ngIf="movementType">
+          <h1>{{islemCaption}}</h1>
+          <div class="form-group">
+            <label type="label" for="name">Ad</label>
+            <input type="text" class="form-control" name="name" required minlength="4" [(ngModel)]="movementType.name" placeholder="Ad">
+          </div>
+
+          <div class="form-group">
+            <label type="label" for="plus">Gelir mi?</label>
+            <div class="form-check">
+                <input class="apple-switch" type="checkbox" name="plus" [value]="movementType.plus" [(ngModel)]="movementType.plus">              
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label type="label" for="ref">Ref?</label>
+            <div class="form-check">
+                <input class="apple-switch" type="checkbox" name="ref" [value]="movementType.ref" [(ngModel)]="movementType.ref">              
+            </div>
+          </div>
+
+          <div class="from-group text-right">
+            <button type="submit" #btnSubmit name="btnSubmit" class="btn btn-primary btn-lg">Onayla</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

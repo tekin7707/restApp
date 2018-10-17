@@ -1,0 +1,69 @@
+<div class="card">
+  <div class="card-header">
+    Firma Listesi {{errMsg}}
+  </div>
+  <div class="card-body">
+    <a routerLink="./../cul">show child</a>
+      <router-outlet></router-outlet>
+    <table class="table table-lg table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Unvan</th>
+          <th scope="col">Email</th>
+          <th scope="col">Şifre</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- <tr *ngIf="companies.length==0">
+          <td colspan="5">Kayıt Yok</td>
+        </tr> -->
+        <tr *ngFor="let c of companies; let i = index">
+          <th scope="row">1</th>
+          <td>{{c.name}}</td>
+          <td>{{c.email}}</td>
+          <td>
+            <button class="btn btn-warning" (click)="setFormEdit(companyForm,c)">
+              <span class="glyphicon glyphicon-edit"></span>
+            </button>
+            <button class="btn btn-danger" (click)="companyDelete(c)">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<hr>
+<button class="btn btn-default btn-sm" (click)="setFormAdd(companyForm)">
+  <i class="glyphicon glyphicon-plus"></i> Firma Ekle</button>
+<hr>
+
+<form (submit)="editCompany(companyForm)" #companyForm="ngForm">
+  <input type="hidden" name="id" ngModel>
+  <div class="form-group">
+    <label type="label" for="name">Ad</label>
+    <input type="text" class="form-control" name="name" ngModel placeholder="Ad">
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email Adresi</label>
+    <input type="email" class="form-control" ngModel name="email" aria-describedby="emailHelp" placeholder="Email giriniz">
+    <small id="emailHelp" class="form-text text-muted">Email adresiniz hiç kimse ile paylaşılmayacaktır .</small>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" name="password" ngModel placeholder="Şifre">
+  </div>
+  <div class="form-group">
+    <label type="label" for="address">Adres</label>
+    <input type="text" class="form-control" name="address" ngModel placeholder="İsim">
+  </div>
+  <div class="from-group">
+    <button type="submit" #btnSubmit name="btnSubmit" class="btn btn-primary">Gönder</button>
+  </div>
+</form>
+<br>

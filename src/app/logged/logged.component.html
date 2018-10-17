@@ -1,0 +1,115 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="btn-group">
+        <a class="navbar-brand" href="#">
+            <img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24" class="center-block"> Rest App
+        </a>
+    </div>
+    <button #navbarToggler class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse bg-dark" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto" *ngIf="isLogged">
+            <li class="nav-item">
+                <a (click)="collapseNav()" class="nav-link" routerLink="main">Ana Sayfa
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="collapseNav()" class="nav-link" routerLink="movement">Hareket</a>
+            </li>
+            <li class="nav-item">
+                <a (click)="collapseNav()" class="nav-link" routerLink="product">Ürünler</a>
+            </li>
+            <li class="nav-item">
+                <a (click)="collapseNav()" class="nav-link" routerLink="customer">Müşteri</a>
+            </li>
+            <li class="nav-item">
+                <a (click)="collapseNav()" class="nav-link" routerLink="company">Firma</a>
+            </li>
+            <li class="nav-item">
+                <a (click)="collapseNav()" class="nav-link" routerLink="user">Kullanıcı</a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav mr-auto" *ngIf="!isLogged">
+            <li class="nav-item active">
+                <a (click)="collapseNav()" class="nav-link" routerLink="main">Ana Sayfa
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="collapseNav()" class="nav-link" routerLink="projects">Projeler</a>
+            </li>
+            <li class="nav-item">
+                <a (click)="collapseNav()" class="nav-link" routerLink="aboutus">Hakkımızda</a>
+            </li>
+        </ul>
+
+        <!--Sağ-->
+        <ul class="nav navbar-nav navbar-right" *ngIf="isLogged">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle btn btn-secondary" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    Tanımlar
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a (click)="collapseNav()" routerLink="movement-type">Hareket Tipi</a>
+                    </li>
+                    <li>
+                        <a (click)="collapseNav()" routerLink="register">Diğer</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <span> &nbsp;</span>
+            </li>
+            <li class="dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="glyphicon glyphicon-user"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a>
+                            <span>
+                                <img *ngIf="picture" [src]="'data:image/png;base64,'+picture.picture" height="40" width="50"> {{loggedUser.name}}
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="../user-profile/{{loggedUser.id}}">
+                            <i class="glyphicon glyphicon-edit"></i> Bilgilerimi Düzenle</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="glyphicon glyphicon-th-large"></i> Raporlarım</a>
+                    </li>
+
+                    <li role="separator" class="divider"></li>
+                    <li class="dropdown-header">çıkış için</li>
+                    <li>
+                        <a (click)="logout()">
+                            <i class="glyphicon glyphicon-triangle-right"></i> Çıkış</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" *ngIf="!isLogged">
+            <li class="dropdown pull-right">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="glyphicon glyphicon-user"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a (click)="collapseNav()" routerLink="login">Giriş</a>
+                    </li>
+                    <li>
+                        <a (click)="collapseNav()" routerLink="register">Kayıt</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <!-- <a class="btn btn-outline-primary" *ngIf="isLogged" (click)="logout()">Logout</a>
+        <a class="btn btn-outline-primary" *ngIf="!isLogged" routerLink="login">Sign up</a> -->
+    </div>
+</nav>

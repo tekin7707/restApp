@@ -1,0 +1,98 @@
+<div class="card">
+  <div class="card-header">Hareket - {{islemCaption}}</div>
+  <div class="card-body">
+    <form (submit)="editMovement()" #movementForm="ngForm" *ngIf="movement">
+      <hr>
+      <h3>Hareket</h3>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <ng-multiselect-dropdown name="_customer" required [data]="customers" [(ngModel)]="_customer" [settings]="vatSettings" (onSelect)="onItemSelectCustomer($event)">
+            </ng-multiselect-dropdown>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" name="dateModel" [(ngModel)]="dateModel" ngbDatepicker #d="ngbDatepicker" (dateSelect)="onDateSelect($event)">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                <span class="glyphicon glyphicon-th-large"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <ng-multiselect-dropdown name="_movement_type" required [data]="movementTypes" [(ngModel)]="_movement_type" [settings]="vatSettings" (onSelect)="onItemSelectMovementType($event)">
+            </ng-multiselect-dropdown>
+          </div>        </div>
+        <div class="col-md-1">
+          <button class="btn btn-lg btn-success" type="button" (click)="editMovement()">
+            <span class="glyphicon glyphicon-floppy-saved"></span>
+          </button>
+        </div>
+      </div>
+      {{_movement.date|json}}
+      <hr>
+      <!-- <h3>Hareket Detayları</h3> -->
+      <br>
+      <div class="row">
+        <div class="col-md-5">
+          <input type="text" class="form-control" name="name" [(ngModel)]="_movement_line.name" placeholder="Açıklama">
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" name="quantity" [(ngModel)]="_movement_line.quantity" placeholder="Adet">
+        </div>
+        <div class="col-md-3">
+          <input type="text" class="form-control" name="price" [(ngModel)]="_movement_line.price" placeholder="Birim Fiyat">
+        </div>
+        <!-- <div class="col-md-2">
+          <button class="btn btn-lg btn-success" type="button" *ngIf="_movement.id>0">
+            <span class="glyphicon glyphicon-floppy-saved"></span>
+          </button>
+        </div> -->
+      </div>
+    </form>
+    <br>
+    <!-- <table class="table">
+      <thead>
+        <th>Açıklama</th>
+        <th>Adet</th>
+        <th>Birim Fiyat</th>
+        <th>Toplam Fiyat</th>
+        <th>Düzenle/Sil</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ml of movement.movement_lines">
+          <td>
+            {{ml.name}}
+          </td>
+          <td>
+            {{ml.quantity}}
+          </td>
+          <td>
+            {{ml.price}}
+          </td>
+          <td>
+            {{ml.price * ml.quantity}}
+          </td>
+          <td>
+            <button class="btn btn-info" type="button" (click)="editLine(ml.id)">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+            <button class="btn btn-danger" type="button" (click)="deleteLine(ml.id)">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Toplam</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table> -->
+
+
+  </div>
+</div>

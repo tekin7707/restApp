@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+          <button class="btn btn-warning" routerLink="../product-edit/add/0">
+            <span class="glyphicon glyphicon-add"></span>
+            Kayıt Ekle
+          </button>
+          <hr>
+  
+        <div class="card">
+          <div class="card-header">
+            Ürün Listesi
+          </div>
+          <div class="card-body">
+            <table id="myDataTable" class="table row-border hover">
+              <thead>
+                <tr>
+                  <th>Ürün Adı</th>
+                  <th>Fiyat</th>
+                  <th>Eski Fiyat</th>
+                  <th>Düzenle / Sil</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let c of products">
+                  <td>{{c.name}}</td>
+                  <td>{{c.price}}</td>
+                  <td>{{c.oldprice}}</td>
+                  <td class="text-right">
+                    <button class="btn btn-warning" routerLink="../product-edit/edit/{{c.id}}">
+                      <span class="glyphicon glyphicon-edit" alt="Düzenle"></span>
+                    </button>
+                    &nbsp;
+                    <button class="btn btn-danger" routerLink="../product-edit/del/{{c.id}}">
+                      <span class="glyphicon glyphicon-trash" alt="Sil"></span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

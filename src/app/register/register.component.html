@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <!-- <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1"> -->
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 content-center">
+      <br>
+      <div class="panel panel-default">
+        <div class="panel-heading text-center">
+          <strong style="color:blue;"> Yeni Kayıt </strong>
+        </div>
+        <div class="panel-body">
+          <form role="form" (submit)="newRecord(newForm)" #newForm="ngForm">
+            <br/>
+            <div class="form-group input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-pencil"></i>
+              </span>
+              <input type="text" class="form-control" name="name" ngModel placeholder="Ünvan" autofocus="autofocus" />
+            </div>
+            <div class="form-group input-group">
+              <span class="input-group-addon">@</span>
+              <input type="text" class="form-control" ngModel name="email" placeholder="Email" />
+            </div>
+            <div class="form-group input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-lock"></i>
+              </span>
+              <input type="password" class="form-control" name="password" ngModel placeholder="Şifre" />
+            </div>
+            <div class="form-group input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-lock"></i>
+              </span>
+              <input type="password" class="form-control" name="password2" ngModel placeholder="Şifre Tekrar" />
+            </div>
+            <div class="form-group input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-tag"></i>
+              </span>
+              <input type="text" class="form-control" placeholder="Adres" />
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block" #btnSubmit name="btnSubmit">Giriş</button>
+            <hr /> Zaten Kayıtlı mısın ?
+            <a routerLink="/../login">Kaydol</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
